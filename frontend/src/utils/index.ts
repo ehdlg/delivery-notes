@@ -1,5 +1,5 @@
 import { ALL_CONDITIONS, DEFAULT_PAGE, DEFAULT_SIZE, REQUIRED_VALUES } from '../constants';
-import { RepairNoteKeys, RepairNoteType, FilterType, FormType, MachineType } from '../types';
+import { FormKeys, RepairNoteType, FilterType, FormType, MachineType } from '../types';
 
 export function calculatePagination(page: number, size: number) {
   page = page > 0 ? page : DEFAULT_PAGE;
@@ -22,7 +22,7 @@ export function filterNote(note: RepairNoteType) {
   let values: Partial<RepairNoteType> = {};
 
   for (const [key, value] of Object.entries(note)) {
-    const typedKey = key as RepairNoteKeys;
+    const typedKey = key as FormKeys;
 
     if (!REQUIRED_VALUES.includes(typedKey) && value === '') {
       values = { ...values, [key]: null };
