@@ -59,7 +59,7 @@ function NoteList() {
           })}
         </div>
       </div>
-      <div className='m-4 grid grid-cols-1 items-center justify-center gap-4 md:grid md:grid-cols-3 xl:m-2 2xl:grid-cols-5'>
+      <div className='m-4 grid grid-cols-1 justify-center gap-4 md:grid md:grid-cols-3 xl:m-2 2xl:grid-cols-5'>
         {!emptyNotes ? (
           notes.map((note) => {
             return <Note note={note} />;

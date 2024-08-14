@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 
 function Navbar() {
   return (
-    <div className='sticky top-0 h-12 border-b border-gray-200 bg-white p-2 opacity-90 shadow-sm'>
+    <div className='sticky top-0 z-50 h-12 border-b border-gray-200 bg-white p-2 opacity-90 shadow-sm'>
       <nav className='mx-auto flex h-full items-center justify-around'>
         <Link to={'/'}>
           <img
