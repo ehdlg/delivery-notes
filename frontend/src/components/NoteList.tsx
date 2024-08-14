@@ -62,7 +62,7 @@ function NoteList() {
       <div className='m-4 grid grid-cols-1 justify-center gap-4 md:grid md:grid-cols-3 xl:m-2 2xl:grid-cols-5'>
         {!emptyNotes ? (
           notes.map((note) => {
-            return <Note note={note} />;
+            return <Note note={note} key={note.id} />;
           })
         ) : (
           <h2 className='col-span-5 text-center text-xl font-semibold text-slate-800'>
