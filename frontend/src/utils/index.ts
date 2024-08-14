@@ -1,5 +1,16 @@
-import { ALL_CONDITIONS, DEFAULT_PAGE, DEFAULT_SIZE, REQUIRED_VALUES } from '../constants';
-import { FormKeys, RepairNoteType, FilterType, FormType, MachineType } from '../types';
+import {
+  ALL_CONDITIONS,
+  DEFAULT_PAGE,
+  DEFAULT_SIZE,
+  REQUIRED_VALUES
+} from '../constants';
+import {
+  FormKeys,
+  RepairNoteType,
+  FilterType,
+  FormType,
+  MachineType
+} from '../types';
 
 export function calculatePagination(page: number, size: number) {
   page = page > 0 ? page : DEFAULT_PAGE;
@@ -69,7 +80,7 @@ export function createFormDataFromNote(note: RepairNoteType): FormType {
   for (let i = 0; i < limit; i++) {
     machines.push({
       malfunction: malfunctionArray[i],
-      model: modelArray[i],
+      model: modelArray[i]
     });
   }
 

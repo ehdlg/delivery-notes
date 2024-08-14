@@ -6,7 +6,7 @@ function Input({
   name,
   type,
   register,
-  disabled = false,
+  disabled = false
 }: FormInput & {
   register?: UseFormRegisterReturn;
   disabled?: boolean;
@@ -15,12 +15,15 @@ function Input({
 
   if (type == 'textarea') {
     return (
-      <label htmlFor={id} className='text-base w-full col-span text-gray-500 font-semibold'>
+      <label
+        htmlFor={id}
+        className='col-span w-full text-base font-semibold text-gray-500'
+      >
         {label}
         <textarea
           name={name}
           id={id}
-          className='block font-normal text-gray-700 bg-gray-50 border w-full h-56 border-gray-200 focus:border-gray-400 focus:border-2 p-1 rounded-md outline-none disabled:cursor-not-allowed disabled:opacity-50'
+          className='block h-56 w-full rounded-md border border-gray-200 bg-gray-50 p-1 font-normal text-gray-700 outline-none focus:border-2 focus:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50'
           disabled={disabled}
           {...register}
         />
@@ -29,13 +32,13 @@ function Input({
   }
 
   return (
-    <label htmlFor={id} className='text-base text-gray-500 font-semibold'>
+    <label htmlFor={id} className='text-base font-semibold text-gray-500'>
       {label}
       <input
         type={type}
         name={name}
         id={id}
-        className='block font-normal text-gray-700 bg-gray-50 border w-full xl:w-3/4 border-gray-200 focus:border-gray-400 focus:border-2 p-1 rounded-md outline-none disabled:cursor-not-allowed disabled:opacity-50'
+        className='block w-full rounded-md border border-gray-200 bg-gray-50 p-1 font-normal text-gray-700 outline-none focus:border-2 focus:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50 xl:w-3/4'
         disabled={disabled}
         {...register}
         step={type === 'number' ? '0.01' : undefined}

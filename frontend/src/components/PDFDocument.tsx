@@ -1,4 +1,11 @@
-import { Page, Text, View, Document, Image, StyleSheet } from '@react-pdf/renderer';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet
+} from '@react-pdf/renderer';
 import { RepairNoteType } from '../types';
 import template from '../assets/template.png';
 
@@ -7,20 +14,20 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 40,
     maxHeight: '100vh',
-    display: 'flex',
+    display: 'flex'
   },
   view: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   template: {
-    width: '80%',
+    width: '80%'
   },
   dataContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '50vh',
+    height: '50vh'
   },
   data: {
     width: '50%',
@@ -28,7 +35,7 @@ const styles = StyleSheet.create({
     border: '2px solid black',
     display: 'flex',
     justifyContent: 'space-between',
-    fontSize: '32px',
+    fontSize: '32px'
   },
   row: {
     display: 'flex',
@@ -37,10 +44,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginHorizontal: 'auto',
-    gap: '10px',
+    gap: '10px'
   },
   label: {
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   emptyColumn: {
     width: '48%',
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   idContainer: {
     display: 'flex',
@@ -60,15 +67,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: '50px',
     fontWeight: 'bold',
-    marginBottom: '20px',
+    marginBottom: '20px'
   },
   warning: {
     border: '2px solid black',
     padding: '24px',
-    fontSize: '20px',
+    fontSize: '20px'
   },
   warningTitle: {
-    fontSize: '30px',
+    fontSize: '30px'
   },
   machinesContainer: {
     display: 'flex',
@@ -76,12 +83,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     border: '1px solid black',
     padding: '10px',
-    flexGrow: 1,
+    flexGrow: 1
   },
   machinesTitle: {
     fontSize: '30px',
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   machineData: {
     display: 'flex',
@@ -91,12 +98,12 @@ const styles = StyleSheet.create({
     height: '100%',
     alignContent: 'center',
     justifyContent: 'space-around',
-    fontSize: '20px',
+    fontSize: '20px'
   },
   machineText: {
     borderBottom: '1px solid gray',
-    width: '100%',
-  },
+    width: '100%'
+  }
 });
 
 function PDFDocument({ note }: { note: Partial<RepairNoteType> }) {
@@ -114,7 +121,11 @@ function PDFDocument({ note }: { note: Partial<RepairNoteType> }) {
             <View style={styles.data}>
               <View style={styles.row}>
                 <Text style={styles.label}>Fecha de Entrada:</Text>
-                <Text>{new Date(note?.entryDate as Date).toLocaleDateString('es-ES')}</Text>
+                <Text>
+                  {new Date(note?.entryDate as Date).toLocaleDateString(
+                    'es-ES'
+                  )}
+                </Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Cliente:</Text>
@@ -150,17 +161,22 @@ function PDFDocument({ note }: { note: Partial<RepairNoteType> }) {
                 <Text>{note.garanty ? 'Sí' : 'No'}</Text>
               </View>
               <View style={styles.warning}>
-                <Text style={styles.warningTitle}>Nota de interés para el cliente</Text>
-                <Text>
-                  * Para la recogida de la maquinaria es imprescindible la entrega de este resguardo
+                <Text style={styles.warningTitle}>
+                  Nota de interés para el cliente
                 </Text>
                 <Text>
-                  * Los presupuestos de reparación que no sean aceptados se les sobrará el valor del
-                  tiempo aplicado a la elaboración de dicho presupuesto
+                  * Para la recogida de la maquinaria es imprescindible la
+                  entrega de este resguardo
                 </Text>
                 <Text>
-                  * Se prevee un plazo de 90 días desde la fecha de admisión de la máquina para ser
-                  retirada, de lo contrario se entenderá abandonada autorizando su desguace
+                  * Los presupuestos de reparación que no sean aceptados se les
+                  sobrará el valor del tiempo aplicado a la elaboración de dicho
+                  presupuesto
+                </Text>
+                <Text>
+                  * Se prevee un plazo de 90 días desde la fecha de admisión de
+                  la máquina para ser retirada, de lo contrario se entenderá
+                  abandonada autorizando su desguace
                 </Text>
               </View>
             </View>
@@ -181,7 +197,11 @@ function PDFDocument({ note }: { note: Partial<RepairNoteType> }) {
             <View style={styles.data}>
               <View style={styles.row}>
                 <Text style={styles.label}>Fecha de Entrada:</Text>
-                <Text>{new Date(note?.entryDate as Date).toLocaleDateString('es-ES')}</Text>
+                <Text>
+                  {new Date(note?.entryDate as Date).toLocaleDateString(
+                    'es-ES'
+                  )}
+                </Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Cliente:</Text>
@@ -217,17 +237,22 @@ function PDFDocument({ note }: { note: Partial<RepairNoteType> }) {
                 <Text>{note.garanty ? 'Sí' : 'No'}</Text>
               </View>
               <View style={styles.warning}>
-                <Text style={styles.warningTitle}>Nota de interés para el cliente</Text>
-                <Text>
-                  * Para la recogida de la maquinaria es imprescindible la entrega de este resguardo
+                <Text style={styles.warningTitle}>
+                  Nota de interés para el cliente
                 </Text>
                 <Text>
-                  * Los presupuestos de reparación que no sean aceptados se les sobrará el valor del
-                  tiempo aplicado a la elaboración de dicho presupuesto
+                  * Para la recogida de la maquinaria es imprescindible la
+                  entrega de este resguardo
                 </Text>
                 <Text>
-                  * Se prevee un plazo de 90 días desde la fecha de admisión de la máquina para ser
-                  retirada, de lo contrario se entenderá abandonada autorizando su desguace
+                  * Los presupuestos de reparación que no sean aceptados se les
+                  sobrará el valor del tiempo aplicado a la elaboración de dicho
+                  presupuesto
+                </Text>
+                <Text>
+                  * Se prevee un plazo de 90 días desde la fecha de admisión de
+                  la máquina para ser retirada, de lo contrario se entenderá
+                  abandonada autorizando su desguace
                 </Text>
               </View>
             </View>

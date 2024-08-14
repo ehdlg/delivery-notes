@@ -12,7 +12,11 @@ function useNotes<T>(resource: string) {
       const info = await res.json();
       const status = res.status;
 
-      const error = new FetchError('An error occurred while fetching the data.', info, status);
+      const error = new FetchError(
+        'An error occurred while fetching the data.',
+        info,
+        status
+      );
 
       throw error;
     }
@@ -20,15 +24,12 @@ function useNotes<T>(resource: string) {
     return res.json();
   };
 
-  const { data, error, isLoading } = useSwr<T, FetchError>(
-    URL,
-    fetcher
-  );
+  const { data, error, isLoading } = useSwr<T, FetchError>(URL, fetcher);
 
   return {
     data,
     error,
-    isLoading,
+    isLoading
   };
 }
 

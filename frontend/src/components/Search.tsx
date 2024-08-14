@@ -15,7 +15,9 @@ function Search() {
     const inputValue = inputRef.current?.value;
 
     if (null == inputValue || Number(inputValue) <= 0) {
-      return toast.error('El ID de la nota no es válido, debe ser un número mayor a 0');
+      return toast.error(
+        'El ID de la nota no es válido, debe ser un número mayor a 0'
+      );
     }
 
     inputRef.current.value = '';
@@ -26,16 +28,16 @@ function Search() {
   return (
     <form
       onSubmit={onSubmit}
-      className='bg-gray-50 rounded focus-within:border-gray-300 focus-within:border-b-2 border flex'
+      className='flex rounded border bg-gray-50 focus-within:border-b-2 focus-within:border-gray-300'
     >
       <input
         type='number'
         ref={inputRef}
-        className='[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-nonebg-inherit rounded  outline-none bg-inherit text-center w-full text-2xl text-gray-700'
+        className='[&::-webkit-inner-spin-button]:appearance-nonebg-inherit w-full rounded bg-inherit text-center text-2xl text-gray-700 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none'
       />
 
       <button type='submit'>
-        <SearchIcon className='text-gray-700 size-6' />
+        <SearchIcon className='size-6 text-gray-700' />
       </button>
     </form>
   );

@@ -7,7 +7,7 @@ import {
   FieldArrayWithId,
   FieldErrors,
   UseFieldArrayAppend,
-  UseFieldArrayRemove,
+  UseFieldArrayRemove
 } from 'react-hook-form';
 import Input from './Input';
 import PDFDocument from './PDFDocument';
@@ -16,7 +16,7 @@ import {
   PrinterIcon,
   PlusIcon,
   MinusIcon,
-  TrashIcon,
+  TrashIcon
 } from '@heroicons/react/24/outline';
 import { FormInput, FormType } from '../types';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -25,34 +25,44 @@ import { createNoteFromForm } from '../utils';
 const Header = ({
   isEdit,
   defaultValues,
-  deleteNote,
+  deleteNote
 }: {
   isEdit: boolean;
   defaultValues: Partial<FormType>;
   deleteNote: null | (() => void);
 }) => {
-  const title = isEdit ? `Nota de reparación ${defaultValues.id}` : 'Nueva nota de reparación';
-  const noteToEdit = isEdit ? createNoteFromForm(defaultValues as FormType) : null;
+  const title = isEdit
+    ? `Nota de reparación ${defaultValues.id}`
+    : 'Nueva nota de reparación';
+  const noteToEdit = isEdit
+    ? createNoteFromForm(defaultValues as FormType)
+    : null;
   const iconStyle =
     'size-10 cursor-pointer text-gray-700 border border-gray-200 p-2 rounded hover:border-none hover:text-white hover:bg-gray-700 transition ease-in';
 
   return (
-    <div className='border-b border-gray-200 flex justify-between w-full items-center mb-8 '>
-      <h2 className='text-md xl:text-2xl text-gray-800 mt-2 pb-4 font-bold '>{title}</h2>
+    <div className='mb-8 flex w-full items-center justify-between border-b border-gray-200'>
+      <h2 className='text-md mt-2 pb-4 font-bold text-gray-800 xl:text-2xl'>
+        {title}
+      </h2>
       <div className='mr-2 flex gap-4'>
         {null != deleteNote && (
           <button type='button' onClick={deleteNote}>
-            <TrashIcon className={iconStyle + ' text-red-500 hover:bg-red-500'} />
+            <TrashIcon
+              className={iconStyle + ' text-red-500 hover:bg-red-500'}
+            />
           </button>
         )}
         {isEdit && (
           <>
-            <PDFDownloadLink document={<PDFDocument note={noteToEdit ?? defaultValues} />}>
+            <PDFDownloadLink
+              document={<PDFDocument note={noteToEdit ?? defaultValues} />}
+            >
               {({ loading }) => {
                 return (
                   <PrinterIcon
                     className={`${iconStyle} ${
-                      loading && 'disabled opacity-20 cursor-not-allowed'
+                      loading && 'disabled cursor-not-allowed opacity-20'
                     }`}
                   />
                 );
@@ -73,7 +83,7 @@ const MachinesInputs = ({
   register,
   errors,
   append,
-  remove,
+  remove
 }: {
   fields: FieldArrayWithId<FormType, 'machines', 'id'>[];
   register: UseFormRegister<FormType>;
@@ -95,11 +105,12 @@ const MachinesInputs = ({
     <>
       {fields.map((field, index) => {
         const firstElement = index === 0;
-        const iconStyles = 'size-6 text-slate-700 hover:scale-125 transition ease-in duration-100';
+        const iconStyles =
+          'size-6 text-slate-700 hover:scale-125 transition ease-in duration-100';
         const actionButton = (
           <button
             type='button'
-            className='w-fit lg:absolute  lg:right-16 lg:bottom-2'
+            className='w-fit lg:absolute lg:bottom-2 lg:right-16'
             onClick={firstElement ? addMachine : removeMachine(index)}
           >
             {firstElement ? (
@@ -116,17 +127,17 @@ const MachinesInputs = ({
               <Input
                 label='Máquina'
                 register={{
-                  ...register(`machines.${index}.model`),
+                  ...register(`machines.${index}.model`)
                 }}
                 name='machines'
                 type='text'
               />
             </div>
-            <div className='flex flex-col gap-1 relative'>
+            <div className='relative flex flex-col gap-1'>
               <Input
                 label='Avería'
                 register={{
-                  ...register(`machines.${index}.malfunction`),
+                  ...register(`machines.${index}.malfunction`)
                 }}
                 name='machines'
                 type='text'
@@ -137,7 +148,7 @@ const MachinesInputs = ({
         );
       })}
       {errors['machines'] && (
-        <span className='block text-red-400 text-sm lg:col-span-2'>
+        <span className='block text-sm text-red-400 lg:col-span-2'>
           {errors.machines.root?.message}
         </span>
       )}
@@ -149,7 +160,7 @@ const GeneralInputs = ({
   inputs,
   register,
   errors,
-  garantyValue,
+  garantyValue
 }: {
   inputs: FormInput[];
   register: UseFormRegister<FormType>;
@@ -175,7 +186,9 @@ const GeneralInputs = ({
               disabled={disabled}
             />
             {errors[input.name] && (
-              <span className='text-red-400 text-sm text-wrap'>{errors[input.name]?.message}</span>
+              <span className='text-wrap text-sm text-red-400'>
+                {errors[input.name]?.message}
+              </span>
             )}
           </div>
         );
@@ -193,7 +206,7 @@ function Form({
   onSubmit,
   defaultValues,
   deleteNote = null,
-  isEdit = false,
+  isEdit = false
 }: {
   inputs: FormInput[];
   onSubmit: SubmitHandler<FormType>;
@@ -208,7 +221,7 @@ function Form({
     reset,
     watch,
     setValue,
-    control,
+    control
   } = useForm<FormType>({ defaultValues });
   const { fields, append, remove } = useFieldArray<FormType>({
     control,
@@ -220,11 +233,13 @@ function Form({
             return 'Comprueba que todos los campos de máquinas y averías no estén vacíos';
           }
         }
-      },
-    },
+      }
+    }
   });
   const garantyValue = isEdit && (watch('garanty') as boolean);
-  garantyValue ? setValue('budget', null) : setValue('budget', defaultValues?.budget ?? null);
+  garantyValue
+    ? setValue('budget', null)
+    : setValue('budget', defaultValues?.budget ?? null);
 
   useEffect(() => {
     reset(defaultValues);
@@ -233,10 +248,14 @@ function Form({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col bg-white border-gray-200 border-2 p-4 w-11/12 2xl:w-1/2 rounded-md m-auto h-auto shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px]'
+      className='m-auto flex h-auto w-11/12 flex-col rounded-md border-2 border-gray-200 bg-white p-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] 2xl:w-1/2'
     >
-      <Form.Header isEdit={isEdit} defaultValues={defaultValues} deleteNote={deleteNote} />
-      <div className='flex flex-col lg:grid lg:grid-cols-2 mx-4 gap-8 mb-12'>
+      <Form.Header
+        isEdit={isEdit}
+        defaultValues={defaultValues}
+        deleteNote={deleteNote}
+      />
+      <div className='mx-4 mb-12 flex flex-col gap-8 lg:grid lg:grid-cols-2'>
         <Form.MachinesInputs
           errors={errors}
           fields={fields}

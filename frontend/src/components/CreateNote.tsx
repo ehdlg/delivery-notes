@@ -30,8 +30,8 @@ function CreateNote() {
         method: 'POST',
         body: JSON.stringify(newNote),
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       });
 
       const data = await response.json();
@@ -53,7 +53,13 @@ function CreateNote() {
     }
   };
 
-  return <Form onSubmit={onSubmit} defaultValues={DEFAULT_FORM_VALUES} inputs={CREATE_INPUTS} />;
+  return (
+    <Form
+      onSubmit={onSubmit}
+      defaultValues={DEFAULT_FORM_VALUES}
+      inputs={CREATE_INPUTS}
+    />
+  );
 }
 
 export default CreateNote;

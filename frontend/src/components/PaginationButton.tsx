@@ -2,18 +2,20 @@
 function PaginationButton({
   show,
   onClick,
-  Icon,
+  Icon
 }: {
   show: boolean;
   onClick: () => void;
-  Icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, 'ref'>>;
+  Icon: React.ForwardRefExoticComponent<
+    Omit<React.SVGProps<SVGSVGElement>, 'ref'>
+  >;
 }) {
   return (
     <button
       onClick={onClick}
       disabled={!show}
-      className={`p-2 rounded-full border border-gray-200 flex gap-2 ${
-        !show ? 'opacity-0 disabled' : ''
+      className={`flex gap-2 rounded-full border border-gray-200 p-2 ${
+        !show ? 'disabled opacity-0' : ''
       }`}
     >
       <Icon className='size-6 text-gray-700' />

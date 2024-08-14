@@ -3,18 +3,20 @@ import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 const PaginationButton = ({
   show,
   onClick,
-  Icon,
+  Icon
 }: {
   show: boolean;
   onClick: () => void;
-  Icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, 'ref'>>;
+  Icon: React.ForwardRefExoticComponent<
+    Omit<React.SVGProps<SVGSVGElement>, 'ref'>
+  >;
 }) => {
   return (
     <button
       onClick={onClick}
       disabled={!show}
-      className={`p-2 rounded-full border border-gray-200 flex gap-2 ${
-        !show ? 'opacity-0 disabled' : ''
+      className={`flex gap-2 rounded-full border border-gray-200 p-2 ${
+        !show ? 'disabled opacity-0' : ''
       }`}
     >
       <Icon className='size-6 text-gray-700' />
@@ -27,7 +29,7 @@ Pagination.Button = PaginationButton;
 function Pagination({
   page,
   pageCount,
-  update,
+  update
 }: {
   page: number;
   pageCount: number;
@@ -37,10 +39,18 @@ function Pagination({
   const showPrior = page - 1 > 0;
 
   return (
-    <div className='flex w-1/2 justify-center items-center gap-10 mx-auto mt-8'>
-      <Pagination.Button Icon={ArrowLeftIcon} onClick={update.prior} show={showPrior} />
-      <span className='text-2xl text-gray-700 font-semibold'>{page}</span>
-      <Pagination.Button Icon={ArrowRightIcon} onClick={update.next} show={showForward} />
+    <div className='mx-auto mt-8 flex w-1/2 items-center justify-center gap-10'>
+      <Pagination.Button
+        Icon={ArrowLeftIcon}
+        onClick={update.prior}
+        show={showPrior}
+      />
+      <span className='text-2xl font-semibold text-gray-700'>{page}</span>
+      <Pagination.Button
+        Icon={ArrowRightIcon}
+        onClick={update.next}
+        show={showForward}
+      />
     </div>
   );
 }

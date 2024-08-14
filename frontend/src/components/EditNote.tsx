@@ -10,7 +10,7 @@ import {
   createFormDataFromNote,
   createNoteFromForm,
   filterNote,
-  formatDateToInput,
+  formatDateToInput
 } from '../utils';
 
 function EditNote() {
@@ -38,7 +38,7 @@ function EditNote() {
     departureDate:
       null != note.departureDate
         ? formatDateToInput(new Date(formDataFromNote.departureDate as Date))
-        : null,
+        : null
   };
 
   const onSubmit: SubmitHandler<FormType> = async (formData) => {
@@ -50,8 +50,8 @@ function EditNote() {
         method: 'PATCH',
         body: JSON.stringify(editedNote),
         headers: {
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       });
 
       const data = await response.json();
@@ -66,7 +66,8 @@ function EditNote() {
 
       const isEdited = (data as number) > 0;
 
-      if (!isEdited) return toast.error('Ocurrió un error al intentar editar la nota');
+      if (!isEdited)
+        return toast.error('Ocurrió un error al intentar editar la nota');
 
       toast.info(`Nota ${id} editada correctamente`);
 
@@ -80,10 +81,11 @@ function EditNote() {
     if (!confirm('¿Seguro que quieres borrar la nota?')) return;
 
     const response = await fetch(URL, {
-      method: 'DELETE',
+      method: 'DELETE'
     });
 
-    if (response.status !== 200) return toast.error(`No se pudo borrar la nota ${id}`);
+    if (response.status !== 200)
+      return toast.error(`No se pudo borrar la nota ${id}`);
 
     toast.success(`Nota ${id} borrada`);
 

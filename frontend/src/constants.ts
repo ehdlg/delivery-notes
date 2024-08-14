@@ -17,9 +17,9 @@ export const CREATE_INPUTS: FormInput[] = [
     options: {
       required: {
         value: true,
-        message: 'El nombre del cliente es obligatorio',
-      },
-    },
+        message: 'El nombre del cliente es obligatorio'
+      }
+    }
   },
   {
     label: 'Número de telefono',
@@ -28,10 +28,13 @@ export const CREATE_INPUTS: FormInput[] = [
     options: {
       required: {
         value: true,
-        message: 'El número de teléfono del cliente es obligatorio',
+        message: 'El número de teléfono del cliente es obligatorio'
       },
-      pattern: { value: /^[0-9]{9}$/, message: 'El número de teléfono debe tener 9 dígitos' },
-    },
+      pattern: {
+        value: /^[0-9]{9}$/,
+        message: 'El número de teléfono debe tener 9 dígitos'
+      }
+    }
   },
   {
     label: 'Fecha de entrada',
@@ -40,27 +43,27 @@ export const CREATE_INPUTS: FormInput[] = [
     options: {
       required: {
         value: true,
-        message: 'La fecha de entrada es obligatoria',
+        message: 'La fecha de entrada es obligatoria'
       },
-      valueAsDate: true,
-    },
+      valueAsDate: true
+    }
   },
   {
     label: 'Garantía',
     name: 'garanty',
     type: 'checkbox',
     options: {
-      required: false,
-    },
+      required: false
+    }
   },
   {
     label: 'Detalles',
     name: 'details',
     type: 'textarea',
     options: {
-      required: false,
-    },
-  },
+      required: false
+    }
+  }
 ] as const;
 
 export const EDIT_INPUTS: FormInput[] = [
@@ -69,21 +72,21 @@ export const EDIT_INPUTS: FormInput[] = [
     label: 'Fecha de salida',
     name: 'departureDate',
     options: { required: false },
-    type: 'date',
+    type: 'date'
   },
   {
     label: '¿Está reparada?',
     name: 'isRepaired',
     options: { required: false },
-    type: 'checkbox',
+    type: 'checkbox'
   },
   {
     label: 'Presupuesto',
     name: 'budget',
     options: { required: false },
-    type: 'number',
+    type: 'number'
   },
-  CREATE_INPUTS.find((input) => input.name === 'details')!,
+  CREATE_INPUTS.find((input) => input.name === 'details')!
 ];
 
 export const DEFAULT_FORM_VALUES: Partial<FormType> = {
@@ -95,36 +98,47 @@ export const DEFAULT_FORM_VALUES: Partial<FormType> = {
   machines: [
     {
       malfunction: '',
-      model: '',
-    },
-  ],
+      model: ''
+    }
+  ]
 };
 
-export const REQUIRED_VALUES: FormKeys[] = ['client', 'entryDate', 'machines', 'phoneNumber'];
+export const REQUIRED_VALUES: FormKeys[] = [
+  'client',
+  'entryDate',
+  'machines',
+  'phoneNumber'
+];
 
 export const NOTE_LIMIT = 15;
 
-export const ALL_CONDITIONS = ['all', 'repaired', 'not-repaired', 'pending', 'unbudgeted'] as const;
+export const ALL_CONDITIONS = [
+  'all',
+  'repaired',
+  'not-repaired',
+  'pending',
+  'unbudgeted'
+] as const;
 
 export const FILTER_INPUTS: { value: FilterType; label: string }[] = [
   {
     value: 'all',
-    label: 'Todas',
+    label: 'Todas'
   },
   {
     value: 'repaired',
-    label: 'Reparadas',
+    label: 'Reparadas'
   },
   {
     value: 'not-repaired',
-    label: 'Sin reparar',
+    label: 'Sin reparar'
   },
   {
     value: 'pending',
-    label: 'Pendientes de recoger',
+    label: 'Pendientes de recoger'
   },
   {
     value: 'unbudgeted',
-    label: 'Sin presupuestar',
-  },
+    label: 'Sin presupuestar'
+  }
 ];
