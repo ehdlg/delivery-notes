@@ -6,6 +6,7 @@
     "dev:frontend": "cd frontend && pnpm dev",
     "dev:backend": "cd backend && pnpm dev",
     "dev": "pnpm -r run dev",
+    "install": "pnpm -r install",
     "start:frontend": "cd frontend && pnpm preview",
     "start:backend": "cd backend && pnpm start",
     "start": "pnpm -r run start"
