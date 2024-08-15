@@ -5,12 +5,13 @@ import Loading from './Loading';
 import Pagination from './Pagination';
 import useNotes from '../hooks/useNotes';
 import { FILTER_INPUTS, NOTE_LIMIT } from '../constants';
-import { FilterType, RepairNoteType } from '../types';
+import { RepairNoteType } from '../types';
 import { calculatePagination, isFilterType } from '../utils';
+import useGetParams from '../hooks/useGetParams';
 
 function NoteList() {
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState<FilterType>('all');
+  const { filter, search, updateSearchParam } = useGetParams();
 
   const updatePage = {
     next: () => setPage((prevPage) => prevPage + 1),
@@ -21,7 +22,8 @@ function NoteList() {
 
     if (!isFilterType(newFilter)) return;
 
-    setFilter(newFilter);
+    updateSearchParam('filter', newFilter);
+
     setPage(1);
   };
 
@@ -29,7 +31,7 @@ function NoteList() {
   const { data, error, isLoading } = useNotes<{
     count: number;
     rows: RepairNoteType[];
-  }>(`/?limit=${limit}&offset=${offset}&condition=${filter}`);
+  }>(`/?limit=${limit}&offset=${offset}&condition=${filter}&search=${search}`);
 
   if (isLoading) return <Loading />;
 
@@ -52,7 +54,10 @@ function NoteList() {
                 label={input.label}
                 value={input.value}
                 update={updateFilter}
-                checked={input.value === filter}
+                checked={
+                  input.value === filter ||
+                  (input.value == 'all' && filter === '')
+                }
                 key={input.label}
               />
             );
