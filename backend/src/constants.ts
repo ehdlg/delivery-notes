@@ -29,17 +29,18 @@ export const WHERE_CONDITION = {
   repaired: { isRepaired: true },
   'not-repaired': { isRepaired: false },
   pending: {
-    entryDate: { [Op.lte]: LIMIT_DATE },
     departureDate: {
       [Op.is]: null,
     },
+    isRepaired: true,
   },
   unbudgeted: {
     budget: {
       [Op.is]: null,
     },
     garanty: false,
+    departureDate: {
+      [Op.is]: null,
+    },
   },
 } as const;
-
-export const DEFAULT_WHERE_CONDITION = WHERE_CONDITION[DEFAULT_CONDITION];
