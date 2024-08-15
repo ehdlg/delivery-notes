@@ -1,27 +1,30 @@
-import { CreationAttributes } from 'sequelize';
+import { CreationAttributes, literal, Op } from 'sequelize';
 import RepairNoteModel from '../db';
 import { IReparirNote, NoteFilterType } from '../types';
-import {
-  PENDING_FILTER,
-  WHERE_CONDITION,
-  DEFAULT_WHERE_CONDITION,
-  DEFAULT_CONDITION,
-} from '../constants';
+import { PENDING_FILTER, WHERE_CONDITION } from '../constants';
 
 export default class RepairNote {
   static async getAll({
     limit,
     offset,
-    condition = DEFAULT_CONDITION,
+    search = '',
+    condition = 'all',
   }: {
     limit: number;
     offset: number;
+    search?: string;
     condition?: NoteFilterType;
   }): Promise<{ rows: IReparirNote[]; count: number }> {
     const results = await RepairNoteModel.findAndCountAll({
       limit,
       offset,
-      where: WHERE_CONDITION[condition] || DEFAULT_WHERE_CONDITION,
+      where: {
+        ...WHERE_CONDITION[condition],
+        [Op.or]: [
+          { client: { [Op.like]: `%${search}%` } },
+          { id: literal(`CAST(id AS CHAR) LIKE '%${search}%'`) },
+        ],
+      },
       order: [['id', 'DESC']],
     });
 
