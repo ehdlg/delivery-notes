@@ -36,3 +36,5 @@ export type FormInput = {
 };
 
 export type FilterType = (typeof ALL_CONDITIONS)[number];
+
+export type SearchParamKey = 'filter' | 'search';
