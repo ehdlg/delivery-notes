@@ -1,18 +1,19 @@
 import RepairNote from '../models';
 import { NextFunction, Request, Response } from 'express';
-import { DEFAULT_CONDITION, DEFAULT_LIMIT, DEFAULT_OFFSET } from '../constants';
 import { HTTPError } from '../errors';
 import { CreationAttributes } from 'sequelize';
 import { IReparirNote, ValidatedDataType } from '../types';
+import { DEFAULT_GET_VALUES } from '../constants';
 
 export default class RepairNoteController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const limit = req.validatedData?.limit || DEFAULT_LIMIT;
-      const offset = req.validatedData?.offset || DEFAULT_OFFSET;
-      const condition = req.validatedData?.condition || DEFAULT_CONDITION;
+      const limit = req.validatedData?.limit || DEFAULT_GET_VALUES.LIMIT;
+      const offset = req.validatedData?.offset || DEFAULT_GET_VALUES.OFFSET;
+      const condition = req.validatedData?.condition || DEFAULT_GET_VALUES.CONDITION;
+      const search = req.validatedData?.search || DEFAULT_GET_VALUES.SEARCH;
 
-      const notes = await RepairNote.getAll({ limit, offset, condition });
+      const notes = await RepairNote.getAll({ limit, offset, search, condition });
 
       return res.json(notes);
     } catch (error) {
