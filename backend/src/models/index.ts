@@ -23,6 +23,7 @@ export default class RepairNote {
         [Op.or]: [
           { client: { [Op.like]: `%${search}%` } },
           { id: literal(`CAST(id AS CHAR) LIKE '%${search}%'`) },
+          { phoneNumber: { [Op.like]: `${search}%` } },
         ],
       },
       order: [['id', 'DESC']],
