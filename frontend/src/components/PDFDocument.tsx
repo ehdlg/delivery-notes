@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
     height: '100%',
     alignContent: 'center',
     justifyContent: 'space-around',
-    fontSize: '32px'
+    fontSize: '22px'
   },
   machineText: {
     borderBottom: '1px solid gray',
     width: '100%',
-    fontSize: '50px'
+    fontSize: '22px'
   }
 });
 
