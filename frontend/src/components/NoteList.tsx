@@ -47,7 +47,7 @@ function NoteList() {
         <h2 className='text-3xl font-semibold text-gray-700'>
           Notas de reparación
         </h2>
-        <div className='flex w-fit flex-col items-center gap-6 self-center rounded border border-gray-200 bg-white p-4 text-xl md:flex-row md:gap-12'>
+        <div className='flex w-fit flex-col items-center gap-6 self-center rounded bg-white p-4 text-xl drop-shadow-md md:flex-row md:gap-12'>
           {FILTER_INPUTS.map((input) => {
             return (
               <Filter
