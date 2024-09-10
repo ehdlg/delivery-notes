@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import RepairNoteController from '../controllers';
+import RepairNoteController from '../controllers/RepairNoteController';
 import {
   validation,
   createRules,
