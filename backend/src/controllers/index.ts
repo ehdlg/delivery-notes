@@ -1,4 +1,4 @@
-import RepairNote from '../models';
+import RepairNote from '../models/RepairNote';
 import { NextFunction, Request, Response } from 'express';
 import { HTTPError } from '../errors';
 import { CreationAttributes } from 'sequelize';
