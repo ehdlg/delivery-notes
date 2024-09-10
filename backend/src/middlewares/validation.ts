@@ -160,3 +160,21 @@ export const updateRules = (() => {
       .withMessage('El presupuesto debe ser un número mayor a 0'),
   ];
 })();
+
+export const userLoginRules = (() => {
+  return [
+    body('username')
+      .exists()
+      .withMessage('Username must be provided')
+      .bail()
+      .notEmpty()
+      .withMessage('Username cannot be empty'),
+
+    body('password')
+      .exists()
+      .withMessage('Password must be provided')
+      .bail()
+      .notEmpty()
+      .withMessage('Password cannot be empty'),
+  ];
+})();
