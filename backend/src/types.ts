@@ -38,4 +38,10 @@ export interface IReparirNote
   budget: CreationOptional<number> | null;
 }
 
+export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>> {
+  id: CreationOptional<number>;
+  username: string;
+  password: string;
+}
+
 export type NoteFilterType = keyof typeof WHERE_CONDITION;
