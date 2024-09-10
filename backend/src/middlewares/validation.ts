@@ -165,16 +165,16 @@ export const userLoginRules = (() => {
   return [
     body('username')
       .exists()
-      .withMessage('Username must be provided')
+      .withMessage('Se debe enviar el nombre de usuario')
       .bail()
       .notEmpty()
-      .withMessage('Username cannot be empty'),
+      .withMessage('El nombre de usuario no puede estar vacío'),
 
     body('password')
       .exists()
-      .withMessage('Password must be provided')
+      .withMessage('Se debe enviar la contraseña')
       .bail()
       .notEmpty()
-      .withMessage('Password cannot be empty'),
+      .withMessage('La contraseña no puede estar vacía'),
   ];
 })();
