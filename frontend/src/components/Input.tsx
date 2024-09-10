@@ -17,7 +17,7 @@ function Input({
     return (
       <label
         htmlFor={id}
-        className='col-span w-full text-base text-lg font-semibold text-gray-600'
+        className='col-span w-full text-base font-semibold text-gray-600'
       >
         {label}
         <textarea
@@ -32,10 +32,7 @@ function Input({
   }
 
   return (
-    <label
-      htmlFor={id}
-      className='text-base text-lg font-semibold text-gray-600'
-    >
+    <label htmlFor={id} className='text-base font-semibold text-gray-600'>
       {label}
       <input
         type={type}
