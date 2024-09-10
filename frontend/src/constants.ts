@@ -142,3 +142,28 @@ export const FILTER_INPUTS: { value: FilterType; label: string }[] = [
     label: 'Sin presupuestar'
   }
 ];
+
+export const LOGIN_INPUTS: FormInput[] = [
+  {
+    label: 'Usuario',
+    name: 'username',
+    options: {
+      required: {
+        value: true,
+        message: 'El usuario es obligatorio'
+      }
+    },
+    type: 'text'
+  },
+  {
+    label: 'Contraseña',
+    name: 'password',
+    type: 'password',
+    options: {
+      required: {
+        value: true,
+        message: 'La contraseña es obligatoria'
+      }
+    }
+  }
+];
