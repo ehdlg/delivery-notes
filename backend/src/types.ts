@@ -17,10 +17,16 @@ export type ValidatedDataType = {
   password?: string;
 } & Partial<CreationAttributes<IReparirNote>>;
 
+type UserAuth = {
+  id: number;
+  username: string;
+};
+
 declare global {
   namespace Express {
     interface Request {
       validatedData?: ValidatedDataType;
+      auth?: UserAuth;
     }
   }
 }
