@@ -3,7 +3,7 @@ import { DataTypes } from 'sequelize';
 import { IReparirNote, IUser } from '../types';
 
 const RepairNote = sequelize.define<IReparirNote>(
-  'Nota',
+  'notas',
   {
     id: {
       primaryKey: true,
@@ -72,7 +72,7 @@ const RepairNote = sequelize.define<IReparirNote>(
   }
 );
 
-const User = sequelize.define<IUser>('Usuario', {
+const User = sequelize.define<IUser>('users', {
   id: {
     primaryKey: true,
     autoIncrement: true,
@@ -96,4 +96,4 @@ export async function initDb() {
   }
 }
 
-export default RepairNote;
+export { RepairNote, User };

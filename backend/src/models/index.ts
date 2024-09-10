@@ -1,5 +1,5 @@
 import { CreationAttributes, literal, Op } from 'sequelize';
-import RepairNoteModel from '../db';
+import { RepairNote as RepairNoteModel } from '../db';
 import { IReparirNote, NoteFilterType } from '../types';
 import { PENDING_FILTER, WHERE_CONDITION } from '../constants';
 
