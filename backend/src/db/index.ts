@@ -1,6 +1,6 @@
 import sequelize from './config';
 import { DataTypes } from 'sequelize';
-import { IReparirNote } from '../types';
+import { IReparirNote, IUser } from '../types';
 
 const RepairNote = sequelize.define<IReparirNote>(
   'Nota',
@@ -71,6 +71,22 @@ const RepairNote = sequelize.define<IReparirNote>(
     },
   }
 );
+
+const User = sequelize.define<IUser>('Usuario', {
+  id: {
+    primaryKey: true,
+    autoIncrement: true,
+    type: DataTypes.INTEGER,
+  },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
 
 export async function initDb() {
   try {
