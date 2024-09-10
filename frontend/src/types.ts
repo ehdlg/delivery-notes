@@ -26,15 +26,31 @@ export type FormType = Omit<RepairNoteType, 'model' | 'malfunction'> & {
 
 export type FormKeys = keyof FormType;
 
-type InputType = 'text' | 'number' | 'checkbox' | 'date' | 'textarea' | 'tel';
+type InputType =
+  | 'text'
+  | 'number'
+  | 'checkbox'
+  | 'date'
+  | 'textarea'
+  | 'tel'
+  | 'password';
 
 export type FormInput = {
   label: string;
-  name: FormKeys;
+  name: FormKeys | LoginKeys;
   type: InputType;
-  options?: RegisterOptions<FormType, FormKeys>;
+  options?:
+    | RegisterOptions<FormType, FormKeys>
+    | RegisterOptions<UserInput, LoginKeys>;
 };
 
 export type FilterType = (typeof ALL_CONDITIONS)[number];
 
 export type SearchParamKey = 'filter' | 'search';
+
+export type UserInput = {
+  username: string;
+  password: string;
+};
+
+export type LoginKeys = keyof UserInput;
