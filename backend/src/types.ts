@@ -13,6 +13,8 @@ export type ValidatedDataType = {
   offset?: number;
   condition?: NoteFilterType;
   search?: string;
+  username?: string;
+  password?: string;
 } & Partial<CreationAttributes<IReparirNote>>;
 
 declare global {
