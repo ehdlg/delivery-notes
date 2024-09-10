@@ -44,3 +44,5 @@ export const WHERE_CONDITION = {
     },
   },
 } as const;
+
+export const SALT_ROUNDS = 12;
