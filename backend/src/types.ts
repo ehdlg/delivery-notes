@@ -17,7 +17,7 @@ export type ValidatedDataType = {
   password?: string;
 } & Partial<CreationAttributes<IReparirNote>>;
 
-type UserAuth = {
+export type UserAuth = {
   id: number;
   username: string;
 };
@@ -27,6 +27,7 @@ declare global {
     interface Request {
       validatedData?: ValidatedDataType;
       auth?: UserAuth;
+      verifiedToken: UserAuth;
     }
   }
 }
