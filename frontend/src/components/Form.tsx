@@ -7,7 +7,8 @@ import {
   FieldArrayWithId,
   FieldErrors,
   UseFieldArrayAppend,
-  UseFieldArrayRemove
+  UseFieldArrayRemove,
+  RegisterOptions
 } from 'react-hook-form';
 import Input from './Input';
 import PDFDocument from './PDFDocument';
@@ -18,7 +19,7 @@ import {
   MinusIcon,
   TrashIcon
 } from '@heroicons/react/24/outline';
-import { FormInput, FormType } from '../types';
+import { FormInput, FormKeys, FormType } from '../types';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { createNoteFromForm } from '../utils';
 
@@ -172,6 +173,11 @@ const GeneralInputs = ({
       {inputs.map((input) => {
         const isBudget = input.name === 'budget';
         const disabled = isBudget && !!garantyValue;
+        const inputName = input.name as FormKeys;
+        const inputOptions = input.options as RegisterOptions<
+          FormType,
+          FormKeys
+        >;
 
         return (
           <div
@@ -182,12 +188,12 @@ const GeneralInputs = ({
               label={input.label}
               name={input.name}
               type={input.type}
-              register={{ ...register(input.name, input.options) }}
+              register={{ ...register(inputName, inputOptions) }}
               disabled={disabled}
             />
-            {errors[input.name] && (
+            {errors[inputName] && (
               <span className='text-wrap text-sm text-red-400'>
-                {errors[input.name]?.message}
+                {errors[inputName]?.message}
               </span>
             )}
           </div>
