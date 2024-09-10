@@ -72,21 +72,27 @@ const RepairNote = sequelize.define<IReparirNote>(
   }
 );
 
-const User = sequelize.define<IUser>('users', {
-  id: {
-    primaryKey: true,
-    autoIncrement: true,
-    type: DataTypes.INTEGER,
+const User = sequelize.define<IUser>(
+  'users',
+  {
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
 export async function initDb() {
   try {
