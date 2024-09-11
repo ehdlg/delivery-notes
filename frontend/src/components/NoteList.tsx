@@ -4,12 +4,15 @@ import Filter from './Filter';
 import Loading from './Loading';
 import Pagination from './Pagination';
 import useNotes from '../hooks/useNotes';
+import { Navigate } from 'react-router-dom';
 import { FILTER_INPUTS, NOTE_LIMIT } from '../constants';
 import { RepairNoteType } from '../types';
 import { calculatePagination, isFilterType } from '../utils';
 import useGetParams from '../hooks/useGetParams';
+import useToken from '../hooks/useToken';
 
 function NoteList() {
+  const { logout } = useToken();
   const [page, setPage] = useState(1);
   const { filter, search, updateSearchParam } = useGetParams();
 
@@ -34,6 +37,16 @@ function NoteList() {
   }>(`/?limit=${limit}&offset=${offset}&condition=${filter}&search=${search}`);
 
   if (isLoading) return <Loading />;
+
+  if (
+    error &&
+    (error.status == 401 || error.status === 403 || error.status === 500)
+  ) {
+    console.error(error.message);
+    logout();
+
+    return <Navigate to={'/login'} />;
+  }
 
   if (error || undefined == data) return null;
 
