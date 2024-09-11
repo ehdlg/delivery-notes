@@ -54,3 +54,9 @@ export type UserInput = {
 };
 
 export type LoginKeys = keyof UserInput;
+
+export type DecodedToken = {
+  user: string;
+  id: number;
+  iss: string;
+};
