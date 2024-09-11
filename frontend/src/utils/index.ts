@@ -74,7 +74,6 @@ export function createFormDataFromNote(note: RepairNoteType): FormType {
 
   const limit = Math.min(modelArray?.length, malfunctionArray?.length);
 
-  console.log({ limit, modelArray, malfunctionArray });
   if (limit === 0) return { ...rest, machines };
 
   for (let i = 0; i < limit; i++) {

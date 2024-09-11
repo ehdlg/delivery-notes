@@ -24,9 +24,6 @@ export function useToken() {
 
     try {
       const decoded = jwtDecode<DecodedToken>(token);
-      console.log(decoded, TOKEN_ISSUER);
-
-      console.log(decoded.iss == TOKEN_ISSUER);
 
       return decoded.iss == TOKEN_ISSUER;
     } catch (error) {
