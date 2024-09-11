@@ -1,14 +1,15 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import Root from './Root';
+import ProtectedRoute from './ProtectedRoute';
 import NoteList from './NoteList';
 import EditNote from './EditNote';
 import CreateNote from './CreateNote';
+import Login from './Login';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <ProtectedRoute />,
     errorElement: <h1>No encontrado</h1>,
     children: [
       {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         element: <CreateNote />
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <Login />
   }
 ]);
 
