@@ -24,13 +24,13 @@ export function errorHandler(
 }
 
 export const createToken: RequestHandler = async (req, res) => {
-  const { SECRET } = process.env;
+  const { SECRET, ISSUER } = process.env;
   const { auth } = req;
 
-  if (!SECRET) {
+  if (null == SECRET || null == ISSUER) {
     throw new HTTPError({
       status: 500,
-      message: 'Error interno del servidor: falta configuración de SECRET',
+      message: 'Error interno del servidor: falta configuración',
     });
   }
 
@@ -41,7 +41,7 @@ export const createToken: RequestHandler = async (req, res) => {
     });
   }
 
-  const token = jwt.sign(auth, SECRET);
+  const token = jwt.sign(auth, SECRET, { issuer: ISSUER });
 
   return res.json({ token });
 };
