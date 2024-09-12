@@ -57,10 +57,7 @@ function NoteList() {
   return (
     <>
       <div className='mb-8 flex w-full flex-col items-center gap-4'>
-        <h2 className='text-3xl font-semibold text-gray-700'>
-          Notas de reparación
-        </h2>
-        <div className='flex w-fit flex-col items-center gap-6 self-center rounded bg-white p-4 text-xl drop-shadow-md md:flex-row md:gap-12'>
+        <div className='m-2 flex flex-col gap-4 text-center text-lg md:flex-row md:self-start'>
           {FILTER_INPUTS.map((input) => {
             return (
               <Filter

@@ -11,7 +11,7 @@ function Filter({
   checked: boolean;
 }) {
   return (
-    <label className='flex cursor-pointer flex-col-reverse gap-2'>
+    <label className='flex cursor-pointer flex-col-reverse'>
       <input
         className='hidden'
         type='radio'
@@ -21,8 +21,8 @@ function Filter({
         checked={checked}
       />
       <span
-        className={`text-gray-700 underline-offset-8 hover:underline ${
-          checked && 'font-bold text-gray-800 hover:no-underline'
+        className={`text-xl text-gray-500 transition ease-in hover:scale-105 hover:text-gray-800 ${
+          checked && 'font-bold text-gray-900 hover:scale-100'
         }`}
       >
         {label}
