@@ -113,7 +113,7 @@ function EditNote() {
 
     toast.success(`Nota ${id} borrada`);
 
-    return setTimeout(navigate, 100, '/');
+    return navigate('/');
   };
 
   return (
