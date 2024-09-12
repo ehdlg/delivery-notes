@@ -12,15 +12,35 @@ import {
   filterNote,
   formatDateToInput
 } from '../utils';
+import useToken from '../hooks/useToken';
 
 function EditNote() {
   const { id } = useParams();
+  const { token, logout } = useToken();
   const navigate = useNavigate();
+
   const { data: note, error, isLoading } = useNotes<RepairNoteType>(`/${id}`);
+
+  if (null == token) {
+    logout();
+
+    return navigate('login');
+  }
 
   const URL = `${API_URL}/${id}`;
 
   if (isLoading) return <Loading />;
+
+  if (
+    error &&
+    (error.status === 401 || error.status === 403 || error.status === 500)
+  ) {
+    toast.error(error.message);
+
+    logout();
+
+    navigate('/login');
+  }
 
   if (error || null == note) {
     const message = error?.info.error;
@@ -50,7 +70,8 @@ function EditNote() {
         method: 'PATCH',
         body: JSON.stringify(editedNote),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         }
       });
 
@@ -81,7 +102,10 @@ function EditNote() {
     if (!confirm('¿Seguro que quieres borrar la nota?')) return;
 
     const response = await fetch(URL, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
 
     if (response.status !== 200)
