@@ -112,7 +112,7 @@ export const REQUIRED_VALUES: FormKeys[] = [
   'phoneNumber'
 ];
 
-export const NOTE_LIMIT = 15;
+export const NOTE_LIMIT = 10;
 
 export const ALL_CONDITIONS = [
   'all',
