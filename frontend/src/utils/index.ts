@@ -1,5 +1,6 @@
 import {
   ALL_CONDITIONS,
+  DB_SEPARATOR,
   DEFAULT_PAGE,
   DEFAULT_SIZE,
   REQUIRED_VALUES
@@ -86,4 +87,8 @@ export function createFormDataFromNote(note: RepairNoteType): FormType {
   const formData: FormType = { ...rest, machines };
 
   return formData;
+}
+
+export function getArrayFromDb(data: string): string[] {
+  return data.split(DB_SEPARATOR);
 }
