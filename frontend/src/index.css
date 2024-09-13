@@ -7,6 +7,26 @@
   animation: spin 1s ease-in-out infinite;
 }
 
+.th-td {
+  @apply p-6;
+}
+
+.tb-td {
+  @apply p-8 sm:text-sm md:text-lg;
+}
+
+.state {
+  @apply rounded-xl border px-4 py-2 text-center font-semibold;
+}
+
+.repaired-state {
+  @apply state border-green-500 bg-green-200 text-green-700;
+}
+
+.unrepaired-state {
+  @apply state border-red-500 bg-red-200 text-red-700;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
