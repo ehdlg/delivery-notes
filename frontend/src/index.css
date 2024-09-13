@@ -12,11 +12,11 @@
 }
 
 .tb-td {
-  @apply p-8 sm:text-sm md:text-lg;
+  @apply p-8;
 }
 
 .state {
-  @apply rounded-xl border px-4 py-2 text-center font-semibold;
+  @apply w-full rounded-xl border px-4 py-2 text-center font-semibold;
 }
 
 .repaired-state {
@@ -25,6 +25,14 @@
 
 .unrepaired-state {
   @apply state border-red-500 bg-red-200 text-red-700;
+}
+
+.table-list {
+  @apply flex h-full w-full list-disc flex-col gap-4 pl-4;
+}
+
+.table-list > li::marker {
+  @apply text-red-900;
 }
 
 @keyframes spin {
