@@ -14,6 +14,8 @@ function Search() {
     const inputValue = inputRef.current?.value;
 
     updateSearchParam('search', inputValue);
+
+    inputRef.current.value = '';
   };
 
   return (
