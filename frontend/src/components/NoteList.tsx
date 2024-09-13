@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Note from './Note';
 import Filter from './Filter';
 import Loading from './Loading';
 import Pagination from './Pagination';
@@ -10,6 +9,7 @@ import { RepairNoteType } from '../types';
 import { calculatePagination, isFilterType } from '../utils';
 import useGetParams from '../hooks/useGetParams';
 import useToken from '../hooks/useToken';
+import NoteTable from './NoteTable';
 
 function NoteList() {
   const { logout } = useToken();
@@ -74,17 +74,15 @@ function NoteList() {
           })}
         </div>
       </div>
-      <div className='m-4 grid grid-cols-1 justify-center gap-4 md:grid md:grid-cols-3 xl:m-2 2xl:grid-cols-5'>
-        {!emptyNotes ? (
-          notes.map((note) => {
-            return <Note note={note} key={note.id} />;
-          })
-        ) : (
+      {!emptyNotes ? (
+        <NoteTable notes={notes} />
+      ) : (
+        <div className='m-4 grid grid-cols-1 justify-center gap-4 md:grid md:grid-cols-3 xl:m-2 2xl:grid-cols-5'>
           <h2 className='col-span-5 text-center text-xl font-semibold text-slate-800'>
             No hay ninguna nota que mostrar.
           </h2>
-        )}
-      </div>
+        </div>
+      )}
       {!emptyNotes && (
         <Pagination page={page} pageCount={pageCount} update={updatePage} />
       )}
