@@ -169,3 +169,5 @@ export const LOGIN_INPUTS: FormInput[] = [
     }
   }
 ];
+
+export const DB_SEPARATOR = '|';
