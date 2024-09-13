@@ -8,10 +8,13 @@ import { type SubmitHandler } from 'react-hook-form';
 import { API_URL, CREATE_INPUTS, DEFAULT_FORM_VALUES } from '../constants';
 import { FormType } from '../types';
 import { createNoteFromForm, filterNote } from '../utils';
+import useToken from '../hooks/useToken';
 
 function CreateNote() {
   const navigate = useNavigate();
   const [document, updateDocument] = usePDF();
+
+  const { token } = useToken();
 
   useEffect(() => {
     if (document.url == null) return;
@@ -30,19 +33,28 @@ function CreateNote() {
         method: 'POST',
         body: JSON.stringify(newNote),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token as string}`
         }
       });
 
       const data = await response.json();
 
-      if (response.status == 422) {
+      if (response.status === 422) {
         const { errors } = data;
 
         errors.forEach((error: string) => {
           toast.error(error);
         });
         return;
+      }
+
+      if (response.status === 401 || response.status === 403) {
+        const { error } = data;
+
+        toast.error(error);
+
+        return navigate('/login');
       }
 
       toast.success('Nota de reparación creada correctamente');
