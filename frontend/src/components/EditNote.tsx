@@ -85,7 +85,7 @@ function EditNote() {
         return;
       }
 
-      const isEdited = (data as number) > 0;
+      const isEdited = null != data;
 
       if (!isEdited)
         return toast.error('Ocurrió un error al intentar editar la nota');
