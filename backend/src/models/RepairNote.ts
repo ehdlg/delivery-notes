@@ -1,7 +1,7 @@
-import { CreationAttributes, literal, Op } from 'sequelize';
-import { RepairNote as RepairNoteModel } from '../db';
-import { IReparirNote, NoteFilterType } from '../types';
-import { PENDING_FILTER, WHERE_CONDITION } from '../constants';
+import { prisma } from '../db/config';
+import { NoteFilterType } from '../types';
+import { WHERE_CONDITION } from '../constants';
+import { Note, Prisma } from '@prisma/client';
 
 export default class RepairNote {
   static async getAll({
@@ -14,65 +14,68 @@ export default class RepairNote {
     offset: number;
     search?: string;
     condition?: NoteFilterType;
-  }): Promise<{ rows: IReparirNote[]; count: number }> {
-    const results = await RepairNoteModel.findAndCountAll({
-      limit,
-      offset,
+  }): Promise<{ rows: Note[]; count: number }> {
+    const searchConditions = {
+      OR: [
+        { client: { contains: search } },
+        { id: { equals: isNaN(+search) ? -1 : +search } },
+        { phoneNumber: { startsWith: search } },
+      ],
+    };
+
+    const [notes, count] = await Promise.all([
+      prisma.note.findMany({
+        take: limit,
+        skip: offset,
+        where: {
+          ...WHERE_CONDITION[condition],
+          ...searchConditions,
+        },
+        orderBy: { id: 'desc' },
+      }),
+      prisma.note.count({
+        where: {
+          ...WHERE_CONDITION[condition],
+          ...searchConditions,
+        },
+      }),
+    ]);
+
+    return { count, rows: notes };
+  }
+
+  static async getOne(id: number) {
+    const note = await prisma.note.findFirst({
       where: {
-        ...WHERE_CONDITION[condition],
-        [Op.or]: [
-          { client: { [Op.like]: `%${search}%` } },
-          { id: literal(`CAST(id AS CHAR) LIKE '%${search}%'`) },
-          { phoneNumber: { [Op.like]: `${search}%` } },
-        ],
+        id,
       },
-      order: [['id', 'DESC']],
     });
 
-    return results;
+    return note || null;
   }
 
-  static async getOne(id: number): Promise<IReparirNote | null> {
-    const note = await RepairNoteModel.findByPk(id);
-
-    return note;
-  }
-
-  static async create(newNote: CreationAttributes<IReparirNote>): Promise<IReparirNote> {
-    const note = await RepairNoteModel.create(newNote);
+  static async create(newNote: Prisma.NoteCreateInput) {
+    const note = await prisma.note.create({
+      data: newNote,
+    });
 
     return note;
   }
 
   static async delete(id: number) {
-    const deletedNote = await RepairNoteModel.destroy({
+    const deletedNote = await prisma.note.delete({ where: { id } });
+
+    return null != deletedNote ? 1 : 0;
+  }
+
+  static async update(id: number, updatedFields: Prisma.NoteUpdateInput): Promise<Note> {
+    const updatedNote = prisma.note.update({
+      data: updatedFields,
       where: {
         id,
       },
     });
 
-    return deletedNote;
-  }
-
-  static async update(
-    id: number,
-    updatedFields: Omit<Partial<CreationAttributes<IReparirNote>>, 'id'>
-  ): Promise<[affectedCount: number]> {
-    const updatedNote = RepairNoteModel.update(updatedFields, {
-      where: {
-        id,
-      },
-    });
-
-    return updatedNote;
-  }
-
-  static async getStadistics() {
-    const notesCount = await RepairNoteModel.count();
-    const pendingNotesCount = await RepairNoteModel.count({
-      where: PENDING_FILTER,
-    });
-
-    return { notesCount, pendingNotesCount };
+    return updatedNote || null;
   }
 }
