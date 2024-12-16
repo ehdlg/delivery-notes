@@ -1,4 +1,4 @@
-import sequelize from './config';
+import { sequelize } from './config';
 import { DataTypes } from 'sequelize';
 import { IReparirNote, IUser } from '../types';
 
