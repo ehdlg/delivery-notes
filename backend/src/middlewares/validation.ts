@@ -7,6 +7,7 @@ export function validation(req: Request, res: Response, next: NextFunction) {
   if (errors.isEmpty()) {
     const validatedData = matchedData(req, { includeOptionals: true });
     req.validatedData = validatedData;
+
     return next();
   }
 
@@ -22,12 +23,14 @@ export const getAllRules = (() => {
     query('limit')
       .optional()
       .isInt({ min: 1 })
-      .withMessage('El límite debe ser un número mayor a 0'),
+      .withMessage('El límite debe ser un número mayor a 0')
+      .toInt(),
 
     query('offset')
       .optional()
       .isInt({ min: 0 })
-      .withMessage('El offset debe ser un número mayor o igual a 0'),
+      .withMessage('El offset debe ser un número mayor o igual a 0')
+      .toInt(),
 
     query('condition').optional({ values: 'undefined' }).default('all'),
 
@@ -36,7 +39,7 @@ export const getAllRules = (() => {
 })();
 
 export const idParamRule = (() => {
-  return [param('id').exists().isInt().withMessage('El ID proporcionado no es válido')];
+  return [param('id').exists().isInt().withMessage('El ID proporcionado no es válido').toInt()];
 })();
 
 export const createRules = (() => {
@@ -148,7 +151,6 @@ export const updateRules = (() => {
       .withMessage(
         'El valor sobre si la máquina está reparada debe ser un booleano (true o false)'
       ),
-
     body('details')
       .optional({ values: 'null' })
       .notEmpty()
@@ -157,7 +159,8 @@ export const updateRules = (() => {
     body('budget')
       .optional({ values: 'null' })
       .isFloat({ min: 1 })
-      .withMessage('El presupuesto debe ser un número mayor a 0'),
+      .withMessage('El presupuesto debe ser un número mayor a 0')
+      .toFloat(),
   ];
 })();
 
