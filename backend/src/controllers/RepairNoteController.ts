@@ -1,9 +1,9 @@
 import RepairNote from '../models/RepairNote';
 import { NextFunction, Request, Response } from 'express';
 import { HTTPError } from '../errors';
-import { CreationAttributes } from 'sequelize';
-import { IReparirNote, ValidatedDataType } from '../types';
+import { ValidatedDataType } from '../types';
 import { DEFAULT_GET_VALUES } from '../constants';
+import { Prisma } from '@prisma/client';
 
 export default class RepairNoteController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
@@ -23,9 +23,9 @@ export default class RepairNoteController {
 
   static async getOne(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = req.validatedData?.id;
+      const id = Number(req.validatedData?.id);
 
-      if (null == id) {
+      if (null == id || typeof id !== 'number') {
         throw new HTTPError({ status: 400, message: 'Invalid ID' });
       }
 
@@ -43,7 +43,7 @@ export default class RepairNoteController {
 
   static async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const newNote = req.validatedData as CreationAttributes<IReparirNote>;
+      const newNote = req.validatedData as Prisma.NoteCreateInput;
       const createdNote = await RepairNote.create(newNote);
 
       return res.status(201).json(createdNote);
@@ -62,7 +62,7 @@ export default class RepairNoteController {
 
       const updatedNote = await RepairNote.update(
         id as number,
-        updateFields as CreationAttributes<IReparirNote>
+        updateFields as Prisma.NoteUpdateInput
       );
 
       return res.json(updatedNote);
