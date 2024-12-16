@@ -30,17 +30,17 @@ export const WHERE_CONDITION = {
   'not-repaired': { isRepaired: false },
   pending: {
     departureDate: {
-      [Op.is]: null,
+      equals: null,
     },
     isRepaired: true,
   },
   unbudgeted: {
     budget: {
-      [Op.is]: null,
+      equals: null,
     },
     garanty: false,
     departureDate: {
-      [Op.is]: null,
+      equals: null,
     },
   },
 } as const;
