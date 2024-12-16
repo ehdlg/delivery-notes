@@ -1,4 +1,4 @@
-import { prisma } from '../db/config';
+import prisma from '../db/';
 
 export default class User {
   static async getByUsername(username: string) {

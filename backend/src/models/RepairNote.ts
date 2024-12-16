@@ -1,4 +1,4 @@
-import { prisma } from '../db/config';
+import prisma from '../db/';
 import { NoteFilterType } from '../types';
 import { WHERE_CONDITION } from '../constants';
 import { Note, Prisma } from '@prisma/client';

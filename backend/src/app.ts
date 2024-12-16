@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import { initDb } from './db';
 import apiRoute from './routes/apiRoute';
 import { errorHandler, notFound } from './middlewares';
 import 'dotenv/config';
@@ -10,8 +9,6 @@ const { PORT } = process.env;
 
 async function main() {
   try {
-    await initDb();
-
     console.log(`Listening on: http://localhost:${PORT}`);
   } catch (error) {
     console.error(error);
