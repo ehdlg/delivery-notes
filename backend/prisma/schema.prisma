@@ -1,0 +1,33 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../notas.db"
+}
+
+model Note {
+  id            Int                              @id @default(autoincrement())
+  client        String
+  phoneNumber   String
+  model         String
+  malfunction   String
+  entryDate     DateTime
+  departureDate DateTime?
+  garanty       Boolean        @default(false)
+  isRepaired    Boolean        @default(false)
+  details       String?
+  budget        Decimal?         
+
+  @@map("notes")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+
+  @@map("users")
+} 
