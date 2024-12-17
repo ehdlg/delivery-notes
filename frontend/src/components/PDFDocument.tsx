@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   machineText: {
     borderBottom: '1px solid gray',
     width: '100%',
-    fontSize: '22px'
+    fontSize: '28px'
   }
 });
 
