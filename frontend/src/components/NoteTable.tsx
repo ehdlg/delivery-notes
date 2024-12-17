@@ -4,9 +4,9 @@ import { getArrayFromDb } from '../utils';
 
 const Header = () => {
   return (
-    <thead className='rounded border-b border-gray-300 bg-gray-100 text-center'>
-      <tr className='p-4 font-semibold text-gray-500 md:text-xl'>
-        <td className='th-td'>No</td>
+    <thead className='rounded border-b border-slate-300 bg-slate-50 text-left'>
+      <tr className='p-4 font-semibold text-slate-600 md:text-xl'>
+        <td className='th-td'>#</td>
         <td className='th-td'>Cliente</td>
         <td className='th-td'>Máquinas</td>
         <td className='th-td hidden md:table-cell'>Averías</td>
@@ -22,7 +22,7 @@ const Header = () => {
 const Body = ({ notes }: { notes: RepairNoteType[] }) => {
   const navigate = useNavigate();
   return (
-    <tbody className='text-gray-700 md:text-lg'>
+    <tbody className='text-slate-800 md:text-lg'>
       {notes.map((note) => {
         const {
           isRepaired,
@@ -48,11 +48,13 @@ const Body = ({ notes }: { notes: RepairNoteType[] }) => {
 
         return (
           <tr
-            className='w-full rounded border-b border-gray-200 bg-white text-center text-lg transition ease-in hover:-translate-x-2 hover:-translate-y-1 hover:cursor-pointer hover:border-0 hover:shadow-lg sm:text-sm md:text-xl'
+            className='w-full rounded border-b border-slate-300 bg-slate-50 text-center text-lg transition ease-in hover:-translate-x-2 hover:-translate-y-1 hover:cursor-pointer hover:border-0 hover:shadow-lg sm:text-sm md:text-xl'
             key={note.id}
             onClick={() => navigate(`/${note.id}`)}
           >
-            <td className='tb-td p-6 text-3xl font-bold'>{note.id}</td>
+            <td className='tb-td p-6 text-left text-2xl font-bold'>
+              {note.id}
+            </td>
             <td className='tb-td'>
               <div className='flex w-full flex-col gap-4 p-8 text-left'>
                 <span className='text-wrap'>{note.client}</span>
@@ -84,7 +86,11 @@ const Body = ({ notes }: { notes: RepairNoteType[] }) => {
                 <span>{state}</span>
               </div>
             </td>
-            <td className='tb-td hidden md:table-cell'>{budgetText}</td>
+            <td
+              className={`tb-td hidden md:table-cell ${null != budget && 'text-right'}`}
+            >
+              {budgetText}
+            </td>
           </tr>
         );
       })}
@@ -97,7 +103,7 @@ NoteTable.Body = Body;
 
 function NoteTable({ notes }: { notes: RepairNoteType[] }) {
   return (
-    <table className='md:text-md rounded-x m-2 w-full min-w-full overflow-x-auto bg-white text-gray-800 shadow-lg'>
+    <table className='md:text-md -x m-2 w-full min-w-full overflow-x-auto bg-slate-100 text-slate-800'>
       <NoteTable.Header />
       <NoteTable.Body notes={notes} />
     </table>
