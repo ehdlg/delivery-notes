@@ -78,7 +78,7 @@ function Login() {
               </span>
               <input
                 type={input.type}
-                className='block w-full rounded-md border border-gray-200 px-4 py-2 outline-none transition duration-200 ease-in focus:border-gray-300 focus:drop-shadow-md'
+                className='block w-full rounded-md border border-slate-200 px-4 py-2 outline-none transition duration-200 ease-in focus:border-slate-300 focus:drop-shadow-md'
                 {...register(inputName, inputOptions)}
               />
               {errors[inputName] && (

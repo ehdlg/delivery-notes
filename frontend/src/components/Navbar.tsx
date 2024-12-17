@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 
 function Navbar() {
   return (
-    <div className='sticky top-0 z-50 h-12 border-b border-gray-200 bg-white p-2 opacity-90 shadow-sm'>
+    <div className='sticky top-0 z-50 h-12 border-b border-slate-200 bg-white p-2 opacity-90 shadow-sm'>
       <nav className='mx-auto flex h-full items-center justify-around'>
         <Link to={'/'}>
           <img
@@ -16,7 +16,7 @@ function Navbar() {
         </Link>
         <Search />
         <Link to='/nueva'>
-          <PlusCircleIcon className='size-8 rounded-full text-gray-700 transition ease-in hover:bg-gray-700 hover:text-white' />
+          <PlusCircleIcon className='size-8 rounded-full text-slate-700 transition ease-in hover:bg-slate-700 hover:text-white' />
         </Link>
       </nav>
     </div>

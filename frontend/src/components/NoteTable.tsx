@@ -58,7 +58,7 @@ const Body = ({ notes }: { notes: RepairNoteType[] }) => {
             <td className='tb-td'>
               <div className='flex w-full flex-col gap-4 p-8 text-left'>
                 <span className='text-wrap'>{note.client}</span>
-                <span className='text-base text-gray-500'>
+                <span className='text-base text-slate-500'>
                   {note.phoneNumber}
                 </span>
               </div>

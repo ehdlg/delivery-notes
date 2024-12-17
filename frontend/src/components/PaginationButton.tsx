@@ -14,11 +14,11 @@ function PaginationButton({
     <button
       onClick={onClick}
       disabled={!show}
-      className={`flex gap-2 rounded-full border border-gray-200 p-2 ${
+      className={`flex gap-2 rounded-full border border-slate-200 p-2 ${
         !show ? 'disabled opacity-0' : ''
       }`}
     >
-      <Icon className='size-6 text-gray-700' />
+      <Icon className='size-6 text-slate-700' />
     </button>
   );
 }

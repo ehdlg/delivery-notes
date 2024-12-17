@@ -21,16 +21,16 @@ function Search() {
   return (
     <form
       onSubmit={onSubmit}
-      className='flex rounded border bg-gray-50 focus-within:border-gray-200'
+      className='flex rounded border bg-slate-50 focus-within:border-slate-200'
     >
       <input
         type='text'
         ref={inputRef}
-        className='[&::-webkit-inner-spin-button]:appearance-nonebg-inherit w-full rounded bg-inherit text-center text-2xl text-gray-700 shadow-inner outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none'
+        className='[&::-webkit-inner-spin-button]:appearance-nonebg-inherit w-full rounded bg-inherit text-center text-2xl text-slate-700 shadow-inner outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none'
       />
 
       <button type='submit'>
-        <SearchIcon className='size-6 text-gray-700' />
+        <SearchIcon className='size-6 text-slate-700' />
       </button>
     </form>
   );

@@ -39,11 +39,11 @@ const Header = ({
     ? createNoteFromForm(defaultValues as FormType)
     : null;
   const iconStyle =
-    'size-10 cursor-pointer text-gray-700 border border-gray-200 p-2 rounded hover:border-none hover:text-white hover:bg-gray-700 transition ease-in';
+    'size-10 cursor-pointer text-slate-700 border border-slate-200 p-2 rounded hover:border-none hover:text-white hover:bg-slate-700 transition ease-in';
 
   return (
-    <div className='mb-8 flex w-full items-center justify-between border-b border-gray-200'>
-      <h2 className='text-md mt-2 pb-4 font-bold text-gray-800 xl:text-2xl'>
+    <div className='mb-8 flex w-full items-center justify-between border-b border-slate-200'>
+      <h2 className='text-md mt-2 pb-4 font-bold text-slate-800 xl:text-2xl'>
         {title}
       </h2>
       <div className='mr-2 flex gap-4'>
@@ -254,7 +254,7 @@ function Form({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='m-auto flex h-auto w-11/12 flex-col rounded-md border-2 border-gray-200 bg-white p-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] 2xl:w-1/2'
+      className='m-auto flex h-auto w-11/12 flex-col rounded-md border-2 border-slate-200 bg-white p-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] 2xl:w-1/2'
     >
       <Form.Header
         isEdit={isEdit}

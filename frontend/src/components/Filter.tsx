@@ -21,8 +21,8 @@ function Filter({
         checked={checked}
       />
       <span
-        className={`text-xl text-gray-500 transition ease-in hover:scale-105 hover:text-gray-800 ${
-          checked && 'font-bold text-gray-900 hover:scale-100'
+        className={`text-xl text-slate-500 transition ease-in hover:scale-105 hover:text-slate-800 ${
+          checked && 'font-bold text-slate-900 hover:scale-100'
         }`}
       >
         {label}
