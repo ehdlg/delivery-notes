@@ -1,15 +1,36 @@
 import { useState } from 'react';
+import useNotes from '../hooks/useNotes';
+import useGetParams from '../hooks/useGetParams';
+import useToken from '../hooks/useToken';
+import { Navigate } from 'react-router-dom';
+import NoteTable from './NoteTable';
+import EmptyFolderIcon from '../icons/EmptyFolder';
 import Filter from './Filter';
 import Loading from './Loading';
 import Pagination from './Pagination';
-import useNotes from '../hooks/useNotes';
-import { Navigate } from 'react-router-dom';
 import { FILTER_INPUTS, NOTE_LIMIT } from '../constants';
-import { RepairNoteType } from '../types';
 import { calculatePagination, isFilterType } from '../utils';
-import useGetParams from '../hooks/useGetParams';
-import useToken from '../hooks/useToken';
-import NoteTable from './NoteTable';
+import { RepairNoteType } from '../types';
+import { Link } from 'react-router-dom';
+
+const EmptyState = () => {
+  return (
+    <div className='mx-auto flex w-1/2 flex-col items-center justify-center gap-y-6'>
+      <EmptyFolderIcon width='20%' />
+      <h2 className='text-center text-2xl font-semibold text-slate-700'>
+        No se ha encontrado ninguna nota
+      </h2>
+      <p className='text-slate-600'>
+        Cambia los filtros actuales o{' '}
+        <Link to={'nueva'} className='font-bold text-slate-500 underline'>
+          crea una nueva nota
+        </Link>
+      </p>
+    </div>
+  );
+};
+
+NoteList.EmptyState = EmptyState;
 
 function NoteList() {
   const { logout } = useToken();
@@ -74,15 +95,7 @@ function NoteList() {
           })}
         </div>
       </div>
-      {!emptyNotes ? (
-        <NoteTable notes={notes} />
-      ) : (
-        <div className='m-4 grid grid-cols-1 justify-center gap-4 md:grid md:grid-cols-3 xl:m-2 2xl:grid-cols-5'>
-          <h2 className='col-span-5 text-center text-xl font-semibold text-slate-800'>
-            No hay ninguna nota que mostrar.
-          </h2>
-        </div>
-      )}
+      {!emptyNotes ? <NoteTable notes={notes} /> : <NoteList.EmptyState />}
       {!emptyNotes && (
         <Pagination page={page} pageCount={pageCount} update={updatePage} />
       )}
