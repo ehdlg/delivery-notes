@@ -7,24 +7,33 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.ts --expose",
     "start": "node dist/app.js --expose",
-    "build": "pnpm install && pnpm exec tsc"
+    "build": "pnpm exec prisma generate && pnpm exec tsc"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "bcrypt",
+      "prisma",
+      "sqlite3"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@libsql/client": "^0.14.0",
-    "@prisma/adapter-libsql": "^6.0.1",
-    "@prisma/client": "^6.0.1",
+    "@prisma/adapter-libsql": "6.19.3",
+    "@prisma/client": "6.19.3",
+    "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
-    "sequelize": "^6.37.3",
-    "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
-    "@types/bcrypt": "^5.0.2",
+    "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
@@ -36,7 +45,7 @@
     "eslint": "9.x",
     "globals": "^15.6.0",
     "nodemon": "^3.1.4",
-    "prisma": "^6.0.1",
+    "prisma": "6.19.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.14.1"
